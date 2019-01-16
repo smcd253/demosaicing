@@ -11,9 +11,10 @@
 
 using namespace std;
 
-float interpolate(float q11, float q12, float q21, float q22) 
+float interpolate(float q12, float q21, float q22) 
 {
-	
+	if()
+	return 0.0; 
 }
 
 int main(int argc, char *argv[])
@@ -54,6 +55,16 @@ int main(int argc, char *argv[])
 	fclose(file);
 
 	///////////////////////// INSERT YOUR PROCESSING CODE HERE /////////////////////////
+	for (int i = 0; i < Size; i++)
+	{
+		for (int j = 0; j < Size; j++)
+		{
+			// interpolate interpolate interpolate 
+			if(i < 1)
+				interpolate(float(Imagedata[i][j][0]), float(Imagedata[i][j][0]), float())
+
+		}
+	}
 
 	// Write image data (filename specified by second argument) from image data matrix
 
