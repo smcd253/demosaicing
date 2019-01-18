@@ -77,26 +77,41 @@ int main(int argc, char *argv[])
 		{ 
 			// boundary cases
 			// top row
-			if ((i == 0))
+			if (i == 0)
 			{
 				// top left corner (green)
 				if (j == 0)
 				{
 					
 				}
+				// top middle
 				else if (j != width - 1)
 				{
-
+					
 				}
+				// top right corner
 				else
 				{
 					
 				}
 			}
-			// bottom left corner
-			else if ((i == height - 1) && (j == 0))
+			else if (i == height - 1)
 			{
-
+				// bottom left corner (green)
+				if (j == 0)
+				{
+					
+				}
+				// bottom middle
+				else if (j != width - 1)
+				{
+					
+				}
+				// bottom right corner
+				else
+				{
+					
+				}
 			}
 			// top right corner
 			else if ((i == 0) && (j == width - 1))
