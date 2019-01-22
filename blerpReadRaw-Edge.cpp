@@ -8,12 +8,10 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
-#include "demosaic.h"
 
 using namespace std;
 
-/* QUESTIONS for TA
-*/
+// compile: ./blerpReadRaw-Edge HW1_images/cat.raw HW1_images/catBlerpEdge.raw 1 390 300 3
 
 int main(int argc, char *argv[])
 {
@@ -80,52 +78,182 @@ int main(int argc, char *argv[])
 			if (i == 0)
 			{
 				// top left corner (green)
+				/*
+				G B
+				R G
+				*/
 				if (j == 0)
 				{
-					
+					// R = 0, G = 1, B = 2
+					// green = center pixel
+					destImageData[i][j][1] = Imagedata[i][j][0];
+					// red = below
+					destImageData[i][j][0] = (unsigned char)(float)Imagedata[i+1][j][0];
+					// blue = right
+					destImageData[i][j][2] = (unsigned char)(float)Imagedata[i][j+1][0];
 				}
 				// top middle
-				else if (j != width - 1)
+				/*
+				G R G R
+				B G B G
+				*/
+				else if (j < width - 1)
 				{
-					
+					/*
+					R G R
+					G B G
+					*/
+					if (j % 2 == 0)
+					{
+						// R = 0, G = 1, B = 2
+						// green = center pixel
+						destImageData[i][j][1] = Imagedata[i][j][0];
+						// red = average of left and right
+						destImageData[i][j][0] = (unsigned char)(0.5*((float)Imagedata[i][j-1][0] + (float)Imagedata[i][j+1][0]));
+						// blue = bottom
+						destImageData[i][j][2] = (unsigned char)(float)Imagedata[i+1][j][0];
+					}
+					/*
+					G R G
+					B G B
+					*/
+					else
+					{
+						// R = 0, G = 1, B = 2
+						// red = center pixel
+						destImageData[i][j][0] = Imagedata[i][j][0];
+						// green = average of bottom, left, and right
+						destImageData[i][j][1] = (unsigned char)(0.33*((float)Imagedata[i+1][j][0]+
+																		(float)Imagedata[i][j+1][0] + 
+																		(float)Imagedata[i][j-1][0]));
+						// blue = average of bottomLeft and bottomRight
+						destImageData[i][j][2] = (unsigned char)(0.25*((float)Imagedata[i+1][j-1][0] +
+																		(float)Imagedata[i+1][j+1][0]));
+					}
 				}
+
 				// top right corner
+				/*
+				G R	 or	R G
+				B G		G B
+				*/
 				else
 				{
-					
+					/*
+					R G
+					G B
+					*/
+					if(j % 2 == 0)
+					{
+						// R = 0, G = 1, B = 2
+						// green = center pixel
+						destImageData[i][j][1] = Imagedata[i][j][0];
+						// red = left
+						destImageData[i][j][0] = (unsigned char)(float)Imagedata[i][j-1][0];
+						// blue = below
+						destImageData[i][j][2] = (unsigned char)(float)Imagedata[i+1][j][0];
+					}
+					/*
+					G R
+					B G
+					*/
+					else
+					{
+						// R = 0, G = 1, B = 2
+						// red = center pixel
+						destImageData[i][j][0] = Imagedata[i][j][0];
+						// green = avg of left and bottom
+						destImageData[i][j][1] = (unsigned char)0.5*((float)Imagedata[i][j-1][0] + (float)Imagedata[i+1][j][0]);
+						// blue = bottom left
+						destImageData[i][j][2] = (unsigned char)(float)Imagedata[i+1][j-1][0];
+					}
 				}
 			}
+
 			// bottom row
 			else if (i == height - 1)
 			{
-				// bottom left corner (green)
+				// bottom left corner
+				/*
+				G R	or	B G
+				B G		G R
+				*/
 				if (j == 0)
 				{
-					
+					/*
+					B G
+					G R	
+					*/
+					if (i % 2 == 0)
+					{
+						// R = 0, G = 1, B = 2
+						// green = center pixel
+						destImageData[i][j][1] = Imagedata[i][j][0];
+						// red = below
+						destImageData[i][j][0] = (unsigned char)(float)Imagedata[i+1][j][0];
+						// blue = right
+						destImageData[i][j][2] = (unsigned char)(float)Imagedata[i][j+1][0];
+					}
+
+					/*
+					G R
+					B G
+					*/
+					else
+					{
+						// R = 0, G = 1, B = 2
+						// blue = center pixel
+						destImageData[i][j][2] = Imagedata[i][j][0];
+						// green = avg of right and top
+						destImageData[i][j][1] = (unsigned char)0.5*((float)Imagedata[i][j+1][0] + (float)Imagedata[i-1][j][0]);
+						// red = top right
+						destImageData[i][j][0] = (unsigned char)(float)Imagedata[i-1][j+1][0];
+					}
 				}
 				// bottom middle
-				else if (j != width - 1)
+				/*
+				G R G R or	B G B G
+				B G B G		G R G R 
+				*/
+				else if (j < width - 1)
 				{
 					
 				}
 				// bottom right corner
+				/*
+				G R or 	R G	or	B G or 	G B
+				B G		G B		G R 	R G
+				*/
 				else
 				{
 					
 				}
 			}
+
 			// left column
+			/*
+			G R
+			B G
+			G R
+			B G
+			*/
 			else if (j == 0)
 			{
 				
 			}
 			
 			// right column
-			else if (j = width - 1)
+			/*
+			G R or	G R
+			B G 	B G
+			G R 	G R
+			B G 	B G
+			*/
+			else if (j == width - 1)
 			{
 
 			}
-			
+
 			// interior cases
 			/* Case 1 (green center 1)
 			G B G
