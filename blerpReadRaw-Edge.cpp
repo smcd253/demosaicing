@@ -95,6 +95,7 @@ int main(int argc, char *argv[])
 					
 				}
 			}
+			// bottom row
 			else if (i == height - 1)
 			{
 				// bottom left corner (green)
@@ -113,16 +114,18 @@ int main(int argc, char *argv[])
 					
 				}
 			}
-			// top right corner
-			else if ((i == 0) && (j == width - 1))
+			// left column
+			else if (j == 0)
+			{
+				
+			}
+			
+			// right column
+			else if (j = width - 1)
 			{
 
 			}
-			// bottom right corner
-			else if ((i == height - 1) && (j == width - 1))
-			{
-
-			}
+			
 			// interior cases
 			/* Case 1 (green center 1)
 			G B G

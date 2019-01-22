@@ -11,9 +11,6 @@
 
 using namespace std;
 
-/* QUESTIONS for TA
-*/
-
 int main(int argc, char *argv[])
 {
 	// Define file pointer and variables
