@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 																		(float)Imagedata[i][j+1][0] + 
 																		(float)Imagedata[i][j-1][0]));
 						// blue = average of bottomLeft and bottomRight
-						destImageData[i][j][2] = (unsigned char)(0.25*((float)Imagedata[i+1][j-1][0] +
+						destImageData[i][j][2] = (unsigned char)(0.5*((float)Imagedata[i+1][j-1][0] +
 																		(float)Imagedata[i+1][j+1][0]));
 					}
 				}
@@ -217,7 +217,57 @@ int main(int argc, char *argv[])
 				*/
 				else if (j < width - 1)
 				{
-					
+					// if (j % 2 == 0)
+					// {
+					// 	/*
+					// 	R G R
+					// 	G B G
+					// 	*/
+					// 	if (i % 2 == 1)
+					// 	{
+					// 		// R = 0, G = 1, B = 2
+					// 		// blue = center pixel
+					// 		destImageData[i][j][2] = Imagedata[i][j][2];
+					// 		// red = average of top left and top right
+					// 		destImageData[i][j][0] = (unsigned char)(0.5*((float)Imagedata[i-1][j-1][0] + (float)Imagedata[i-1][j+1][0]));
+					// 		// green = average of top, bottom, left, and right
+					// 		destImageData[i][j][1] = (unsigned char)(0.33*((float)Imagedata[i-1][j][0]+
+					// 														(float)Imagedata[i][j+1][0]+ 
+					// 														(float)Imagedata[i][j-1][0]));
+					// 	}
+						
+					// 	/*
+					// 	G B G
+					// 	R G R
+					// 	*/
+					// 	else
+					// 	{
+					// 		// R = 0, G = 1, B = 2
+					// 		// green = center pixel
+					// 		destImageData[i][j][1] = Imagedata[i][j][0];
+					// 		// red = average of left and right
+					// 		destImageData[i][j][0] = (unsigned char)(0.5*((float)Imagedata[i][j-1][0] + (float)Imagedata[i][j+1][0]));
+					// 		// blue = top
+					// 		destImageData[i][j][2] = (unsigned char)(float)Imagedata[i-1][j][0];
+					// 	}
+					// }
+					// /*
+					// G R G
+					// B G B
+					// */
+					// else 
+					// {
+					// 	// R = 0, G = 1, B = 2
+					// 	// red = center pixel
+					// 	destImageData[i][j][0] = Imagedata[i][j][0];
+					// 	// green = average of bottom, left, and right
+					// 	destImageData[i][j][1] = (unsigned char)(0.33*((float)Imagedata[i+1][j][0]+
+					// 													(float)Imagedata[i][j+1][0] + 
+					// 													(float)Imagedata[i][j-1][0]));
+					// 	// blue = average of bottomLeft and bottomRight
+					// 	destImageData[i][j][2] = (unsigned char)(0.5*((float)Imagedata[i+1][j-1][0] +
+					// 													(float)Imagedata[i+1][j+1][0]));
+					// }
 				}
 				// bottom right corner
 				/*
